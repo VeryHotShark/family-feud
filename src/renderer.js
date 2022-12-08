@@ -1,7 +1,7 @@
-// let $ = jQuery = require('jquery')
-// $("#description").text("New Description");
+const {ipcRenderer} = require('electron')
 
-const information = document.getElementById('description');
-information.innerText = "New Description";
+let $ = jQuery = require('jquery')
+$("#description").text("New Description");
 
-console.log('DUPA');
+// const information = document.getElementById('description');
+// information.innerText = "New Description";
