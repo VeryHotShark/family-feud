@@ -23,7 +23,8 @@
     "electron-squirrel-startup": "^1.0.0",
     "electron-window-state": "^5.0.3",
     "jquery": "^3.6.1",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "sound-play": "^1.1.0"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.4",
