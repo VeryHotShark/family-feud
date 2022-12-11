@@ -4,6 +4,7 @@ const path = require('path');
 const sound = require('sound-play');
 
 let hostWindow, playerWindow;
+let selectedQuestions = [];
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -103,7 +104,12 @@ ipcMain.on('on-play-button-clicked', () => {
   hostWindow.loadFile(path.join(__dirname, 'question-menu.html'));
 })
 
-ipcMain.on('on-start-button-clicked', () => {
+ipcMain.on('on-start-button-clicked', (e, args) => {
+  selectedQuestions = args;
 
-  // loadFile(path.join(__dirname, 'question-menu.html'));
+  selectedQuestions.forEach(index => {
+    console.log(index);
+  });
+
+  hostWindow.loadFile(path.join(__dirname, 'game.html'));
 })
