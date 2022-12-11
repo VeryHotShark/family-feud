@@ -22,10 +22,11 @@ const createWindow = () => {
     y: state.y,
     width: state.width,
     height: state.height,
+    backgroundColor: '#ffebcd',
     webPreferences: {
       contextIsolation: false,
       nodeIntegration: true,
-      enableRemoteControl: true,
+      enableRemoteModule: true,
       preload: path.join(__dirname, 'preload.js'),
     },
   });
@@ -63,19 +64,23 @@ const createWindow = () => {
   */
   
   // SHORTCUTS
+  globalShortcut.register('CommandOrControl+Q', () => {
+    playAudio("WrongAnswer");
+  })
+
   globalShortcut.register('CommandOrControl+W', () => {
-    // playAudio("WrongAnswer");
-    let fileName = "/sounds/WrongAnswer.mp3";
-    let filePath = path.join(app.getAppPath(), fileName);
-    hostWindow.webContents.send('audio', filePath);
+    playAudio("Faceoff");
+  })
+
+  globalShortcut.register('CommandOrControl+E', () => {
+    playAudio("RoundWin");
   })
 };
 
 function playAudio(audioName) {
-    let fileName = "/sounds/WrongAnswer.mp3";
-    let filePath = path.join(app.getAppPath(), fileName);
-    // console.log(filePath);
-    sound.play(filePath);
+  let fileName = `/sounds/${audioName}.mp3`;
+  let filePath = path.join(app.getAppPath(), fileName);
+  hostWindow.webContents.send('audio', filePath);
 }
 
 app.on('ready', createWindow);
@@ -93,3 +98,12 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+ipcMain.on('on-play-button-clicked', () => {
+  hostWindow.loadFile(path.join(__dirname, 'question-menu.html'));
+})
+
+ipcMain.on('on-start-button-clicked', () => {
+
+  // loadFile(path.join(__dirname, 'question-menu.html'));
+})

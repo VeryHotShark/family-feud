@@ -4,5 +4,16 @@ body {
     Arial, sans-serif;
   margin: auto;
   max-width: 38rem;
-  padding: 2rem;
+  text-align: center;
 }
+
+h1 {
+  padding-top: 20%;
+  font-size: 4rem;
+}
+
+.btn {
+  vertical-align: middle;
+  margin-top: 30%;
+}
+

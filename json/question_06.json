@@ -1,0 +1,29 @@
+{
+    "question" : "Wymień coś, w czym twoja była dziewczyna była lepsza od twojej żony",
+    "answers" : [
+        {
+            "answer" : "sex",
+            "points" : 47
+        },
+        {
+            "answer" : "ubieranie sie",
+            "points" : 23
+        },
+        {
+            "answer" : "gotowanie",
+            "points" : 10
+        },
+        {
+            "answer" : "sprzatanie",
+            "points" : 4
+        },
+        {
+            "answer" : "Maniery",
+            "points" : 2
+        },
+        {
+            "answer" : "Zarty",
+            "points" : 1
+        }
+    ]
+}

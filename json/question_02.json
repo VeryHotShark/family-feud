@@ -1,0 +1,21 @@
+{
+    "question" : "Co jako pacjent, nie chciał byś usłyszeć od swojego doktora",
+    "answers" : [
+        {
+            "answer" : "Masz raka",
+            "points" : 47
+        },
+        {
+            "answer" : "jesteś gruby",
+            "points" : 23
+        },
+        {
+            "answer" : "kocham cię",
+            "points" : 10
+        },
+        {
+            "answer" : "Nie jestem doktorem",
+            "points" : 4
+        }
+    ]
+}

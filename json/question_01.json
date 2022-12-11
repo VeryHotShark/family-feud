@@ -1,0 +1,25 @@
+{
+    "question" : "Wymień wymówke, którą mężczyźni używają by się nie spotykać.",
+    "answers" : [
+        {
+            "answer" : "Nie chce mi sie",
+            "points" : 47
+        },
+        {
+            "answer" : "jestem zajęty",
+            "points" : 23
+        },
+        {
+            "answer" : "nie mogę",
+            "points" : 10
+        },
+        {
+            "answer" : "dupa",
+            "points" : 4
+        },
+        {
+            "answer" : "kot",
+            "points" : 1
+        }
+    ]
+}
