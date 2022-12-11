@@ -29,7 +29,7 @@ let questionFiles = fs
 function addQuestionToList(question) {
   let input = $('<input>', {
     "type": 'checkbox',
-    "class": 'form-check-input me-1',
+    "class": 'form-check-input',
   });
 
   let label = $('<label></label>', {
