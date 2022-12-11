@@ -5,6 +5,8 @@ let $ = (jQuery = require("jquery"));
 
 const questionFolder = "./json/";
 
+let selectedCount = 0;
+
 $("button").on("click", function (e) {
   let selectedQuestions = [];
 
@@ -18,6 +20,20 @@ $("button").on("click", function (e) {
 
   // ipcRenderer.send('on-start-button-clicked', )
 });
+
+//called when document is loaded 
+$(function() {
+  $("input[type=checkbox]").on('change', function() {
+
+    if(this.checked)
+      selectedCount++;
+    else
+      selectedCount--;
+
+    $('h2').text(selectedCount);
+  })
+})
+
 
 let questionFiles = fs
   .readdirSync(questionFolder, { withFileTypes: true })

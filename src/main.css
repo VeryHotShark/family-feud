@@ -8,11 +8,14 @@ body {
 }
 
 h1 {
+  text-shadow: 2px 2px gray;
   padding-top: 20%;
   font-size: 4rem;
+  font-weight: bold;
 }
 
 .btn {
+  text-shadow: 1px 1px gray;
   vertical-align: middle;
   margin-top: 30%;
 }
