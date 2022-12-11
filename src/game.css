@@ -1,3 +1,34 @@
 body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
     background-color: blanchedalmond;
+}
+
+.control-element {
+    text-align: center;    
+}
+
+.control-button {
+    width: 100px;
+    height: 100px;
+}
+
+.control-button:hover {
+    color: white;
+}
+
+.controls {
+    max-width: 60%;
+}
+
+h1 {
+    text-shadow: 2px 2px gray;   
+}
+
+h2 {
+    text-shadow: 1.5px 1.5px gray;   
+}
+
+h5 {
+  text-shadow: 1px 1px gray;  
 }
