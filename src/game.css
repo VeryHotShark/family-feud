@@ -4,6 +4,11 @@ body {
     background-color: blanchedalmond;
 }
 
+.main-row {
+    max-width: 90%;
+    margin: 5% 5%;
+}
+
 .control-element {
     text-align: center;    
 }
@@ -18,7 +23,13 @@ body {
 }
 
 .controls {
+    margin-top:10%;
     max-width: 60%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-content: flex-end;
+    align-items: flex-end;
+    justify-content: space-between;
 }
 
 h1 {
@@ -30,5 +41,39 @@ h2 {
 }
 
 h5 {
-  text-shadow: 1px 1px gray;  
+    text-shadow: 1px 1px gray;  
+}
+
+.team-buttons {
+    position: absolute;
+    bottom: 0;
+    margin: 0 0 1% 0;
+    height: 175px;
+    max-width:none;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+.team-button {
+    flex: 1;
+    margin: 0 1%;
+    display: flex;
+}
+
+.team-label {
+    font-size: 4rem;
+    margin: auto;
+}
+
+.team-points {
+    margin: auto 0;
+    font-size: 4rem;
+    opacity: 0.75;
+}
+
+.x-icons {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
 }
