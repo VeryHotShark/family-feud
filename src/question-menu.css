@@ -40,7 +40,7 @@ h2 {
 .list-group {
   border-style: solid none;
   border-radius: 10px;
-  max-height: 550px;
+  max-height: 350px;
   overflow-x: hidden;
   overflow-y: scroll;
   scrollbar-width: thin;

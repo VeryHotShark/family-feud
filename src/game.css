@@ -1,6 +1,7 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif;
+    user-select: none;
     background-color: blanchedalmond;
 }
 
@@ -30,6 +31,26 @@ body {
     align-content: flex-end;
     align-items: flex-end;
     justify-content: space-between;
+}
+
+.answer-items {
+    font-weight: bold;
+}
+
+table {
+    margin: 5%;
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+th, td {
+    text-shadow: 1px 1px gray;
+    padding: 10px 0;
+    border-bottom: 1px solid gray;
+}   
+
+tbody tr:hover {
+    background-color: rgb(205, 184, 153);
 }
 
 h1 {

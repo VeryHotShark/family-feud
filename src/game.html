@@ -25,7 +25,10 @@
         <div class="row controls">
           <div class="control-element col-lg-4">
             <h5>Wrong Answer</h5>
-            <button type="button" class="btn btn-outline-danger control-button">
+            <button 
+              type="button"
+              id="wrong-button"
+              class="btn btn-outline-danger control-button">
               <i class="fa-solid fa-x fa-4x"></i>
             </button>
           </div>
@@ -34,6 +37,7 @@
             <h5>Timer (5s)</h5>
             <button
               type="button"
+              id="timer-button"
               class="btn btn-outline-warning control-button"
             >
               <i class="fa-solid fa-hourglass fa-4x"></i>
@@ -44,6 +48,7 @@
             <h5>Next Question</h5>
             <button
               type="button"
+              id="next-button"
               class="btn btn-outline-success control-button"
             >
               <i class="fa-solid fa-angle-right fa-4x"></i>
@@ -53,59 +58,67 @@
       </div>
 
       <div class="answers col-lg-6">
-        <ol>
-          <li class="answer-item">
-            <div class="row">
-              <p class="answer">Jakas odpowiedz</p>
-              <p class="points">45</p>
-            </div>
-          </li>
+        <table>
+          <thead>
+            <tr>
+              <th>Answers</th>
+              <th>points</th>
+            </tr>
+          </thead>
 
-          <li class="answer-item">
-            <p class="answer">Jakas odpowiedz</p>
-            <p class="points">45</p>
-          </li>
+          <tbody>
+            <tr>
+              <td>Jakas Odpowiedz</td>
+              <td>45</td>
+            </tr>
 
-          <li class="answer-item">
-            <p class="answer">Jakas odpowiedz</p>
-            <p class="points">45</p>
-          </li>
+            <tr>
+              <td>Kolejna Odpowiedz</td>
+              <td>37</td>
+            </tr>
 
-          <li class="answer-item">
-            <p class="answer">Jakas odpowiedz</p>
-            <p class="points">45</p>
-          </li>
+            <tr>
+              <td>Nastpena Odpowiedz</td>
+              <td>24</td>
+            </tr>
 
-          <li class="answer-item">
-            <p class="answer">Jakas odpowiedz</p>
-            <p class="points">45</p>
-          </li>
-        </ol>
+            <tr>
+              <td>Znowu Odpowiedz</td>
+              <td>12</td>
+            </tr>
+
+            <tr>
+              <td>Oczywisze ze Odpowiedz</td>
+              <td>7</td>
+            </tr>
+
+            <tr>
+              <td>Ostatni Odpowiedz</td>
+              <td>3</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
     <div class="team-buttons container">
-      <div class="btn btn-outline-danger team-button team-button-left">
+      <div id="team-red" class="btn btn-outline-danger team-button">
         <div class="x-icons">
           <i class="fa-solid fa-x fa-3x"></i>
           <i class="fa-solid fa-x fa-3x"></i>
           <i class="fa-solid fa-x fa-3x"></i>
         </div>
-        <h1 class=" team-label">
-          Team Red
-        </h1>
-        <h2 class=" team-points">56</h2>
+        <h1 class="team-label">Team Red</h1>
+        <h2 class="team-points">56</h2>
       </div>
-      <div class="btn btn-outline-primary team-button team-button-right">
+      <div id="team-blue" class="btn btn-outline-primary team-button">
         <div class="x-icons">
           <i class="fa-solid fa-x fa-3x"></i>
           <i class="fa-solid fa-x fa-3x"></i>
           <i class="fa-solid fa-x fa-3x"></i>
         </div>
-        <h1 class=" team-label">
-          Team Blue
-        </h1 >
-        <h2 class=" team-points">100</h2>
+        <h1 class="team-label">Team Blue</h1>
+        <h2 class="team-points">100</h2>
       </div>
     </div>
   </body>
