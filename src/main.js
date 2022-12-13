@@ -1,7 +1,6 @@
 const { app, BrowserWindow, ipcMain, session, globalShortcut } = require('electron');
 const windowStateKeeper = require('electron-window-state');
 const path = require('path');
-const sound = require('sound-play');
 
 let hostWindow, playerWindow;
 let selectedQuestions = [];
@@ -111,5 +110,7 @@ ipcMain.on('on-start-button-clicked', (e, args) => {
     console.log(index);
   });
 
-  hostWindow.loadFile(path.join(__dirname, 'game.html'));
+  hostWindow.loadFile(path.join(__dirname, 'game.html')).then(() => {
+    hostWindow.webContents.send("selected-questions-send", selectedQuestions);
+  }) 
 })
