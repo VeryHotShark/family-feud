@@ -1,14 +1,23 @@
 const { ipcRenderer} = require('electron');
-const { app, dialog } = require('@electron/remote');
+const { app, dialog , globalShortcut} = require('@electron/remote');
 const path = require('path');
 const fs = require("fs");
 
+globalShortcut.register('CommandOrControl+W', () => {
+  playAudio("Faceoff");
+})
+
+globalShortcut.register('CommandOrControl+Q', () => {
+  playAudio("WrongAnswer");
+})
+
+
 let $ = (jQuery = require("jquery"));
 
-let currentQuestionIndex = 1;
+let currentQuestionIndex = 0;
 let questions = [];
 
-let points = 0;
+let gainedPoints = 0;
 let selectedTeam;
 
 const questionFolder = "./json/";
@@ -32,6 +41,8 @@ function addXIcon(){
 }
 
 function addAnswersToList(answers) {
+  $("tbody").empty();
+
   answers.forEach((answer) => {
     let tdAnswer = $("<td></td>", {
       text: answer.answer,
@@ -48,10 +59,16 @@ function addAnswersToList(answers) {
     trAnswer.one("click", function() {
       trAnswer.addClass('cross-text half-opacity');
       let pointsText = $(this).find("td").last().text();
-      points += parseInt(pointsText);
+      gainedPoints += parseInt(pointsText);
       playAudio('CorrectAnswer') 
     })
   })
+}
+
+function UpdateQuestion(question) {
+  $('#question-counter').text((currentQuestionIndex + 1) + "/" + questions.length);
+  $('#question').text(question.question);
+  addAnswersToList(question.answers);
 }
 
 ipcRenderer.on('selected-questions-send', (e, args) => {
@@ -68,11 +85,7 @@ ipcRenderer.on('selected-questions-send', (e, args) => {
     }
   });
 
-  let firstQuestion = questions[0] 
-
-  $('#question-counter').text("1/" + questions.length);
-  $('#question').text(firstQuestion.question);
-  addAnswersToList(firstQuestion.answers);
+  UpdateQuestion(questions[0]);
 })
 
 $("#timer-button").on("click", function () {
@@ -94,20 +107,52 @@ $("#winner-button").on("click", function () {
     if(res.response === 0) {
       let pointsRed = $('.points-red');
       let currentPoints = parseInt(pointsRed.text());
-       pointsRed.text(currentPoints + points);
+       pointsRed.text(currentPoints + gainedPoints);
     }
     else {
       let pointsBlue = $('.points-blue');
       let currentPoints = parseInt(pointsBlue.text());
-      pointsBlue.text(currentPoints + points);
+      pointsBlue.text(currentPoints + gainedPoints);
     }
 
     playAudio('RoundWin');
   })
 });
 
-$("#next-button").on("click", function () {
+function GetWinnerTeam() {
+  let pointsBlue = parseInt($('.points-blue').text());
+  let pointsRed = parseInt($('.points-red').text());
 
+  if(pointsRed > pointsBlue) {
+    return {
+      team : "Red Wins!",
+      points : pointsRed    
+    }
+  }
+  else if(pointsRed < pointsBlue)
+  {
+    return {
+      team : "Blue Wins!",
+      points : pointsBlue    
+    }
+  }
+  else
+  {
+    return {
+      team : "Draw!",
+      points : pointsRed    
+    }
+  }
+}
+
+$("#next-button").on("click", function () {
+  gainedPoints = 0;
+  currentQuestionIndex++;
+
+  if(currentQuestionIndex < questions.length)
+    UpdateQuestion(questions[currentQuestionIndex]);
+  else
+    ipcRenderer.send('on-questions-end', GetWinnerTeam())
 });
 
 $(".team-button").on("click", function() {
