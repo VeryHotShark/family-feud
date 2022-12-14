@@ -25,7 +25,7 @@ body {
 
 .controls {
     margin-top:10%;
-    max-width: 60%;
+    max-width: 90%;
     display: flex;
     flex-flow: row nowrap;
     align-content: flex-end;
@@ -97,4 +97,12 @@ h5 {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
+}
+
+.half-opacity {
+    opacity: 0.5;
+}
+
+.cross-text {
+    text-decoration: line-through;
 }

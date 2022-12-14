@@ -1,9 +1,13 @@
 const { app, BrowserWindow, ipcMain, session, globalShortcut } = require('electron');
 const windowStateKeeper = require('electron-window-state');
 const path = require('path');
+const remote = require('@electron/remote/main');
+
+remote.initialize();
 
 let hostWindow, playerWindow;
 let selectedQuestions = [];
+
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -31,6 +35,7 @@ const createWindow = () => {
     },
   });
 
+  
   /*
   playerWindow = new BrowserWindow({
     x: state.x + 300,
@@ -45,15 +50,16 @@ const createWindow = () => {
     },
   })
   */
-
-  hostWindow.loadFile(path.join(__dirname, 'main.html'));
-  // playerWindow.loadFile(path.join(__dirname, 'main.html'));
-
-  state.manage(hostWindow);
-
-  hostWindow.webContents.openDevTools();
-
-  hostWindow.on('closed',  () => {
+ 
+ hostWindow.loadFile(path.join(__dirname, 'main.html'));
+ // playerWindow.loadFile(path.join(__dirname, 'main.html'));
+ 
+ state.manage(hostWindow);
+ remote.enable(hostWindow.webContents);
+ 
+ hostWindow.webContents.openDevTools();
+ 
+ hostWindow.on('closed',  () => {
     hostWindow = null
   })
 

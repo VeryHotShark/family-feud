@@ -1,11 +1,35 @@
-const {ipcRenderer} = require('electron');
+const { ipcRenderer} = require('electron');
+const { app, dialog } = require('@electron/remote');
+const path = require('path');
 const fs = require("fs");
+
 let $ = (jQuery = require("jquery"));
 
 let currentQuestionIndex = 1;
 let questions = [];
 
+let points = 0;
+let selectedTeam;
+
 const questionFolder = "./json/";
+
+function playAudio(audioName) {
+  let fileName = `/sounds/${audioName}.mp3`;
+  let filePath = path.join(app.getAppPath(), fileName);
+  let audio = new Audio(filePath);
+  audio.play();
+}
+
+function addXIcon(){
+  let icon = $("<i></i>", {
+    class: "fa-solid fa-x fa-3x"
+  });
+
+  let iconsDiv = $(selectedTeam).find('.x-icons')
+
+  if(iconsDiv.children().length < 3)
+    iconsDiv.append(icon);
+}
 
 function addAnswersToList(answers) {
   answers.forEach((answer) => {
@@ -21,8 +45,11 @@ function addAnswersToList(answers) {
     
     $("tbody").append(trAnswer);
 
-    trAnswer.on("click", function() {
-      console.log($(this).index()); 
+    trAnswer.one("click", function() {
+      trAnswer.addClass('cross-text half-opacity');
+      let pointsText = $(this).find("td").last().text();
+      points += parseInt(pointsText);
+      playAudio('CorrectAnswer') 
     })
   })
 }
@@ -53,13 +80,53 @@ $("#timer-button").on("click", function () {
 });
 
 $("#wrong-button").on("click", function () {
-  console.log("wrong");
+  playAudio("WrongAnswer");
+
+  if(selectedTeam !== undefined)
+    addXIcon();
+});
+
+$("#winner-button").on("click", function () {
+  dialog.showMessageBox({
+    message: 'Which team won the round?',
+    buttons: ['Red', 'Blue']
+  }).then(res => {
+    if(res.response === 0) {
+      let pointsRed = $('.points-red');
+      let currentPoints = parseInt(pointsRed.text());
+       pointsRed.text(currentPoints + points);
+    }
+    else {
+      let pointsBlue = $('.points-blue');
+      let currentPoints = parseInt(pointsBlue.text());
+      pointsBlue.text(currentPoints + points);
+    }
+
+    playAudio('RoundWin');
+  })
 });
 
 $("#next-button").on("click", function () {
-  console.log("next");
+
 });
 
 $(".team-button").on("click", function() {
-  console.log(this.id);
+  
+  let teamRed = $('#team-red');
+  let teamBlue = $('#team-blue');
+
+  let opacity = 'half-opacity';
+  
+  selectedTeam = this;
+  $(this).removeClass(opacity);
+  
+  if(this.id == teamRed.attr('id'))  {
+    if(!teamBlue.hasClass(opacity))
+      teamBlue.addClass(opacity);
+  }
+  else {
+    if(!teamRed.hasClass(opacity))
+      teamRed.addClass(opacity);
+  }
+
 })
