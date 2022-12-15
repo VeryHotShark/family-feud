@@ -86,3 +86,7 @@ i {
     margin: 0 15px;
     transform: scale(1, 0.9);
 }
+
+.hide {
+    visibility: hidden;
+}

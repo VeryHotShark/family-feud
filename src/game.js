@@ -1,16 +1,16 @@
-const { ipcRenderer} = require('electron');
-const { app, dialog , globalShortcut} = require('@electron/remote');
-const path = require('path');
+const { ipcRenderer } = require("electron");
+const remote = require("@electron/remote");
+const { app, dialog, globalShortcut } = remote;
+const path = require("path");
 const fs = require("fs");
 
-globalShortcut.register('CommandOrControl+W', () => {
+globalShortcut.register("CommandOrControl+W", () => {
   playAudio("Faceoff");
-})
+});
 
-globalShortcut.register('CommandOrControl+Q', () => {
+globalShortcut.register("CommandOrControl+Q", () => {
   playAudio("WrongAnswer");
-})
-
+});
 
 let $ = (jQuery = require("jquery"));
 
@@ -19,6 +19,8 @@ let questions = [];
 
 let gainedPoints = 0;
 let selectedTeam;
+
+let viewWindow = remote.getGlobal("playerWindow");
 
 const questionFolder = "./json/";
 
@@ -29,56 +31,63 @@ function playAudio(audioName) {
   audio.play();
 }
 
-function addXIcon(){
+function addXIcon() {
   let icon = $("<i></i>", {
-    class: "fa-solid fa-x fa-3x"
+    class: "fa-solid fa-x fa-3x",
   });
 
-  let iconsDiv = $(selectedTeam).find('.x-icons')
+  let iconsDiv = $(selectedTeam).find(".x-icons");
 
-  if(iconsDiv.children().length < 3)
-    iconsDiv.append(icon);
+  if (iconsDiv.children().length < 3) iconsDiv.append(icon);
+
+  if (selectedTeam.id === "team-red")
+    ipcRenderer.sendTo(viewWindow.webContents.id, "on-wrong-answer", "red");
+  else ipcRenderer.sendTo(viewWindow.webContents.id, "on-wrong-answer", "blue");
 }
 
 function addAnswersToList(answers) {
   $("tbody").empty();
 
-  answers.forEach((answer) => {
+  answers.forEach((answer, index) => {
     let tdAnswer = $("<td></td>", {
       text: answer.answer,
     });
-    
+
     let tdPoint = $("<td></td>", {
       text: answer.points,
     });
 
     let trAnswer = $("<tr></tr>").append(tdAnswer, tdPoint);
-    
+
     $("tbody").append(trAnswer);
 
-    trAnswer.one("click", function() {
-      trAnswer.addClass('cross-text half-opacity');
+    trAnswer.one("click", function () {
+      trAnswer.addClass("cross-text half-opacity");
       let pointsText = $(this).find("td").last().text();
       gainedPoints += parseInt(pointsText);
-      playAudio('CorrectAnswer') 
-    })
-  })
+      playAudio("CorrectAnswer");
+      ipcRenderer.sendTo(viewWindow.webContents.id, "on-answer-click", index);
+    });
+  });
 }
 
 function UpdateQuestion(question) {
-  $('#question-counter').text((currentQuestionIndex + 1) + "/" + questions.length);
-  $('#question').text(question.question);
+  $("#question-counter").text(
+    currentQuestionIndex + 1 + "/" + questions.length
+  );
+  $("#question").text(question.question);
   addAnswersToList(question.answers);
+  ipcRenderer.sendTo(viewWindow.webContents.id, "on-question-update", question);
 }
 
-ipcRenderer.on('selected-questions-send', (e, args) => {
+ipcRenderer.on("selected-questions-send", (e, args) => {
   let questionFiles = fs
-  .readdirSync(questionFolder, { withFileTypes: true })
-  .filter((item) => !item.isDirectory())
-  .map((item) => item.name);
+    .readdirSync(questionFolder, { withFileTypes: true })
+    .filter((item) => !item.isDirectory())
+    .map((item) => item.name);
 
   questionFiles.forEach((fileName, index) => {
-    if(args.includes(index)) {
+    if (args.includes(index)) {
       let rawData = fs.readFileSync(questionFolder + fileName);
       let question = JSON.parse(rawData);
       questions.push(question);
@@ -86,62 +95,72 @@ ipcRenderer.on('selected-questions-send', (e, args) => {
   });
 
   UpdateQuestion(questions[0]);
-})
+
+  ipcRenderer.sendTo(viewWindow.webContents.id, "on-game-start");
+});
 
 $("#timer-button").on("click", function () {
-  console.log("timer");
+  playAudio("Countdown3");
 });
 
 $("#wrong-button").on("click", function () {
   playAudio("WrongAnswer");
 
-  if(selectedTeam !== undefined)
-    addXIcon();
+  if (selectedTeam !== undefined) addXIcon();
 });
 
 $("#winner-button").on("click", function () {
-  dialog.showMessageBox({
-    message: 'Which team won the round?',
-    buttons: ['Red', 'Blue']
-  }).then(res => {
-    if(res.response === 0) {
-      let pointsRed = $('.points-red');
-      let currentPoints = parseInt(pointsRed.text());
-       pointsRed.text(currentPoints + gainedPoints);
-    }
-    else {
-      let pointsBlue = $('.points-blue');
-      let currentPoints = parseInt(pointsBlue.text());
-      pointsBlue.text(currentPoints + gainedPoints);
-    }
+  dialog
+    .showMessageBox({
+      message: "Which team won the round?",
+      buttons: ["Red", "Blue"],
+    })
+    .then((res) => {
+      let totalPoints = 0;
 
-    playAudio('RoundWin');
-  })
+      if (res.response === 0) {
+        let pointsRed = $(".points-red");
+        let currentPoints = parseInt(pointsRed.text());
+        totalPoints = currentPoints + gainedPoints;
+        pointsRed.text(totalPoints);
+      } else {
+        let pointsBlue = $(".points-blue");
+        let currentPoints = parseInt(pointsBlue.text());
+        totalPoints = currentPoints + gainedPoints;
+        pointsBlue.text(totalPoints);
+      }
+
+      ipcRenderer.sendTo(viewWindow.webContents.id, "on-points-update", {
+        team: res.response,
+        points: totalPoints,
+      });
+
+      playAudio("RoundWin");
+    });
 });
 
 function GetWinnerTeam() {
-  let pointsBlue = parseInt($('.points-blue').text());
-  let pointsRed = parseInt($('.points-red').text());
+  let pointsBlue = parseInt($(".points-blue").text());
+  let pointsRed = parseInt($(".points-red").text());
 
-  if(pointsRed > pointsBlue) {
+  if (pointsRed > pointsBlue) {
     return {
-      team : "Red Wins!",
-      points : pointsRed    
-    }
-  }
-  else if(pointsRed < pointsBlue)
-  {
+      team: 0,
+      caption: "Red Wins!",
+      points: pointsRed,
+    };
+  } else if (pointsRed < pointsBlue) {
     return {
-      team : "Blue Wins!",
-      points : pointsBlue    
-    }
-  }
-  else
-  {
+      team: 1,
+      caption: "Blue Wins!",
+      points: pointsBlue,
+    };
+  } else {
     return {
-      team : "Draw!",
-      points : pointsRed    
-    }
+      team: -1,
+      caption: "Draw!",
+      points: pointsRed,
+    };
   }
 }
 
@@ -149,29 +168,36 @@ $("#next-button").on("click", function () {
   gainedPoints = 0;
   currentQuestionIndex++;
 
-  if(currentQuestionIndex < questions.length)
+  if (currentQuestionIndex < questions.length)
     UpdateQuestion(questions[currentQuestionIndex]);
-  else
-    ipcRenderer.send('on-questions-end', GetWinnerTeam())
+  else ipcRenderer.send("on-questions-end", GetWinnerTeam());
+
+  // reset buttins and icons
+  $(".x-icons").empty();
+
+  selectedTeam === undefined;
+
+  let teamRed = $("#team-red");
+  let teamBlue = $("#team-blue");
+
+  let opacity = "half-opacity";
+
+  if (!teamBlue.hasClass(opacity)) teamBlue.addClass(opacity);
+  if (!teamRed.hasClass(opacity)) teamRed.addClass(opacity);
 });
 
-$(".team-button").on("click", function() {
-  
-  let teamRed = $('#team-red');
-  let teamBlue = $('#team-blue');
+$(".team-button").on("click", function () {
+  let teamRed = $("#team-red");
+  let teamBlue = $("#team-blue");
 
-  let opacity = 'half-opacity';
-  
+  let opacity = "half-opacity";
+
   selectedTeam = this;
   $(this).removeClass(opacity);
-  
-  if(this.id == teamRed.attr('id'))  {
-    if(!teamBlue.hasClass(opacity))
-      teamBlue.addClass(opacity);
-  }
-  else {
-    if(!teamRed.hasClass(opacity))
-      teamRed.addClass(opacity);
-  }
 
-})
+  if (this.id == teamRed.attr("id")) {
+    if (!teamBlue.hasClass(opacity)) teamBlue.addClass(opacity);
+  } else {
+    if (!teamRed.hasClass(opacity)) teamRed.addClass(opacity);
+  }
+});

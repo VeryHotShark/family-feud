@@ -11,7 +11,8 @@ const remote = require("@electron/remote/main");
 
 remote.initialize();
 
-let hostWindow, playerWindow;
+let hostWindow
+global.playerWindow;
 let selectedQuestions = [];
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -57,6 +58,7 @@ const createWindow = () => {
       contextIsolation: false,
       nodeIntegration: true,
       enableRemoteModule: true,
+      preload: path.join(__dirname, "preload.js"),
     },
   });
 
@@ -68,6 +70,7 @@ const createWindow = () => {
   remote.enable(playerWindow.webContents);
 
   hostWindow.webContents.openDevTools();
+  playerWindow.webContents.openDevTools();
 
   hostWindow.on("closed", () => {
     hostWindow = null;
@@ -116,6 +119,8 @@ ipcMain.on("on-start-button-clicked", (e, args) => {
   //   console.log(index);
   // });
 
+  playerWindow.webContents.send("selected-questions-send", selectedQuestions)
+  
   hostWindow.loadFile(path.join(__dirname, "game.html")).then(() => {
     hostWindow.webContents.send("selected-questions-send", selectedQuestions);
   });
