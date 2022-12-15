@@ -46,7 +46,7 @@ hr {
     padding-top: 3%;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .answer-container {
@@ -75,4 +75,14 @@ hr {
 
 #title {
     /* display: none; */
+}
+
+.icons {
+    height: 60px;
+    width: 250px;
+}
+
+i {
+    margin: 0 15px;
+    transform: scale(1, 0.9);
 }
