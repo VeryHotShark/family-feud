@@ -27,7 +27,7 @@ h2 {
 ol {
     margin: auto;
     max-width: 50%;
-    margin-top: 50px;
+    margin-top: 0px;
 }
 
 li {
@@ -43,14 +43,13 @@ hr {
 
 .main-container {
     margin: auto 5%;
-    padding-top: 3%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .answer-container {
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -73,10 +72,6 @@ hr {
     display: inline;
 }
 
-#title {
-    /* display: none; */
-}
-
 .icons {
     height: 60px;
     width: 250px;
@@ -90,3 +85,38 @@ i {
 .hide {
     visibility: hidden;
 }
+
+#overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 0, 0, 0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+  }
+
+  #overlay-icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 200px;
+    color: red;
+    text-shadow: 2px 2px gray;
+    transform: translate(-50%,-50%);
+    /* transform: scale(10,10); */
+    z-index: 3;
+    -ms-transform: translate(-50%,-50%);
+  }
+
+  .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+  }

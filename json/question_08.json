@@ -1,29 +1,25 @@
 {
-    "question" : "Wymień coś, w czym twoja była dziewczyna była lepsza od twojej żony",
+    "question" : "Wymień czynności które, robi się na imprezach",
     "answers" : [
         {
-            "answer" : "sex",
-            "points" : 47
+            "answer" : "Tańczyć",
+            "points" : 45
         },
         {
-            "answer" : "ubieranie sie",
-            "points" : 23
+            "answer" : "Rozmawiać",
+            "points" : 21
         },
         {
-            "answer" : "gotowanie",
-            "points" : 10
+            "answer" : "Pić",
+            "points" : 18
         },
         {
-            "answer" : "sprzatanie",
-            "points" : 4
+            "answer" : "Jeść",
+            "points" : 8
         },
         {
-            "answer" : "Maniery",
-            "points" : 2
-        },
-        {
-            "answer" : "Zarty",
-            "points" : 1
+            "answer" : "Śpiewać",
+            "points" : 6
         }
     ]
 }

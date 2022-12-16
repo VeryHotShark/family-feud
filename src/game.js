@@ -4,14 +4,6 @@ const { app, dialog, globalShortcut } = remote;
 const path = require("path");
 const fs = require("fs");
 
-globalShortcut.register("CommandOrControl+W", () => {
-  playAudio("Faceoff");
-});
-
-globalShortcut.register("CommandOrControl+Q", () => {
-  playAudio("WrongAnswer");
-});
-
 let $ = (jQuery = require("jquery"));
 
 let currentQuestionIndex = 0;
@@ -106,6 +98,8 @@ $("#timer-button").on("click", function () {
 $("#wrong-button").on("click", function () {
   playAudio("WrongAnswer");
 
+  ipcRenderer.sendTo(viewWindow.webContents.id,"on-wrong-general");
+
   if (selectedTeam !== undefined) addXIcon();
 });
 
@@ -168,9 +162,23 @@ $("#next-button").on("click", function () {
   gainedPoints = 0;
   currentQuestionIndex++;
 
-  if (currentQuestionIndex < questions.length)
+  if (currentQuestionIndex < questions.length) {
     UpdateQuestion(questions[currentQuestionIndex]);
-  else ipcRenderer.send("on-questions-end", GetWinnerTeam());
+  }
+  else {
+    dialog.showMessageBox({
+      message: "Out of Questions. What to do next?",
+      buttons: ["End Game", "Fast Money"],
+    })
+    .then((res) => {
+      if (res.response === 0) {
+        ipcRenderer.sendTo( viewWindow.webContents.id,"on-questions-end", GetWinnerTeam());
+        playAudio("IntroSong");
+      }
+      else
+        ipcRenderer.send("on-fast-money-start");
+    })
+  }
 
   // reset buttins and icons
   $(".x-icons").empty();

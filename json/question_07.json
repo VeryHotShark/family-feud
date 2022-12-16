@@ -1,29 +1,21 @@
 {
-    "question" : "Wymień coś, w czym twoja była dziewczyna była lepsza od twojej żony",
+    "question" : "Wymień coś na co dzieci uwielbiają wskakiwać",
     "answers" : [
         {
-            "answer" : "sex",
-            "points" : 47
+            "answer" : "Łóżko",
+            "points" : 71
         },
         {
-            "answer" : "ubieranie sie",
-            "points" : 23
+            "answer" : "Trampolina",
+            "points" : 20
         },
         {
-            "answer" : "gotowanie",
-            "points" : 10
+            "answer" : "Kanapa",
+            "points" : 5
         },
         {
-            "answer" : "sprzatanie",
-            "points" : 4
-        },
-        {
-            "answer" : "Maniery",
-            "points" : 2
-        },
-        {
-            "answer" : "Zarty",
-            "points" : 1
+            "answer" : "Kupa Liści",
+            "points" : 3
         }
     ]
 }

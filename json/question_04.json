@@ -1,29 +1,21 @@
 {
-    "question" : "Wymień coś, w czym twoja była dziewczyna była lepsza od twojej żony",
+    "question" : "Wymień powód/okazje do Celebracji/Opicia",
     "answers" : [
         {
-            "answer" : "sex",
-            "points" : 47
+            "answer" : "Zdanie Matury/Licencjat",
+            "points" : 32
         },
         {
-            "answer" : "ubieranie sie",
-            "points" : 23
+            "answer" : "Ślub/Wesele",
+            "points" : 26
         },
         {
-            "answer" : "gotowanie",
-            "points" : 10
+            "answer" : "Podwyzka",
+            "points" : 20
         },
         {
-            "answer" : "sprzatanie",
-            "points" : 4
-        },
-        {
-            "answer" : "Maniery",
-            "points" : 2
-        },
-        {
-            "answer" : "Zarty",
-            "points" : 1
+            "answer" : "BarMictwa/CHrzest",
+            "points" : 14
         }
     ]
 }

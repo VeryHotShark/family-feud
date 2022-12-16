@@ -1,21 +1,25 @@
 {
-    "question" : "Co jako pacjent, nie chciał byś usłyszeć od swojego doktora",
+    "question" : "Wymień czynność, którą robisz przed lustrem",
     "answers" : [
         {
-            "answer" : "Masz raka",
-            "points" : 47
+            "answer" : "Myjesz zęby",
+            "points" : 26
         },
         {
-            "answer" : "jesteś gruby",
+            "answer" : "Czeszanie/Suszenie Włosów",
             "points" : 23
         },
         {
-            "answer" : "kocham cię",
-            "points" : 10
+            "answer" : "Wyciskać pryszcz",
+            "points" : 19
         },
         {
-            "answer" : "Nie jestem doktorem",
-            "points" : 4
+            "answer" : "Obczajać się (Ubiór)",
+            "points" : 17
+        },
+        {
+            "answer" : "Ćwiczyć/Trenować/Tańczyć",
+            "points" : 15
         }
     ]
 }

@@ -1,25 +1,25 @@
 {
-    "question" : "Wymień wymówke, którą mężczyźni używają by się nie spotykać.",
+    "question" : "Wymień coś co można lizać.",
     "answers" : [
         {
-            "answer" : "Nie chce mi sie",
-            "points" : 47
+            "answer" : "Lody",
+            "points" : 40
         },
         {
-            "answer" : "jestem zajęty",
-            "points" : 23
+            "answer" : "Lizak",
+            "points" : 25
         },
         {
-            "answer" : "nie mogę",
-            "points" : 10
+            "answer" : "Znaczek Pocztowy",
+            "points" : 16
         },
         {
-            "answer" : "dupa",
-            "points" : 4
+            "answer" : "Łyżka",
+            "points" : 11
         },
         {
-            "answer" : "kot",
-            "points" : 1
+            "answer" : "Koperta",
+            "points" : 8
         }
     ]
 }

@@ -1,29 +1,29 @@
 {
-    "question" : "Wymień coś, w czym twoja była dziewczyna była lepsza od twojej żony",
+    "question" : "Wymień potwora z filmu, który mógłby pokonać Dracule w walce",
     "answers" : [
         {
-            "answer" : "sex",
-            "points" : 47
+            "answer" : "Godzilla",
+            "points" : 43
         },
         {
-            "answer" : "ubieranie sie",
-            "points" : 23
+            "answer" : "Frankeinstein",
+            "points" : 26
         },
         {
-            "answer" : "gotowanie",
+            "answer" : "King Kong",
+            "points" : 13
+        },
+        {
+            "answer" : "Wilkołak",
             "points" : 10
         },
         {
-            "answer" : "sprzatanie",
-            "points" : 4
+            "answer" : "Freddy Krueger",
+            "points" : 5
         },
         {
-            "answer" : "Maniery",
+            "answer" : "Jason Voorhes (Piątek 13)",
             "points" : 2
-        },
-        {
-            "answer" : "Zarty",
-            "points" : 1
         }
     ]
 }

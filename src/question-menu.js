@@ -58,8 +58,8 @@ function addQuestionToList(question) {
   // .append(`<label class="list-group-item"><input type="checkbox" class="form-check-input me-1"> ${question} </label>`)
 }
 
-questionFiles.forEach((questionName) => {
+questionFiles.forEach((questionName, index) => {
   let rawData = fs.readFileSync(questionFolder + questionName);
   let question = JSON.parse(rawData);
-  addQuestionToList(question.question);
+  addQuestionToList(index + ". " + question.question);
 });

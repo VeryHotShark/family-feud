@@ -1,29 +1,29 @@
 {
-    "question" : "Wymień coś, w czym twoja była dziewczyna była lepsza od twojej żony",
+    "question" : "Zapytaliśmy 100 kobiet, co jest najfajniejszą rzeczą, którą można robić z inną kobietą",
     "answers" : [
         {
-            "answer" : "sex",
-            "points" : 47
+            "answer" : "Zakupy",
+            "points" : 46
         },
         {
-            "answer" : "ubieranie sie",
-            "points" : 23
+            "answer" : "Plotkować",
+            "points" : 31
         },
         {
-            "answer" : "gotowanie",
-            "points" : 10
+            "answer" : "Lunch/Brunch/Jedzenie",
+            "points" : 6
         },
         {
-            "answer" : "sprzatanie",
+            "answer" : "Picie Drinków",
+            "points" : 5
+        },
+        {
+            "answer" : "Śmiać się",
             "points" : 4
         },
         {
-            "answer" : "Maniery",
-            "points" : 2
-        },
-        {
-            "answer" : "Zarty",
-            "points" : 1
+            "answer" : "Całować się",
+            "points" : 3
         }
     ]
 }

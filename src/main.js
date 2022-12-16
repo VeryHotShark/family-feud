@@ -69,8 +69,8 @@ const createWindow = () => {
   remote.enable(hostWindow.webContents);
   remote.enable(playerWindow.webContents);
 
-  hostWindow.webContents.openDevTools();
-  playerWindow.webContents.openDevTools();
+  // hostWindow.webContents.openDevTools();
+  // playerWindow.webContents.openDevTools();
 
   hostWindow.on("closed", () => {
     hostWindow = null;

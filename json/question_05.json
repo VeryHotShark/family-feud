@@ -1,29 +1,21 @@
 {
-    "question" : "Wymień coś, w czym twoja była dziewczyna była lepsza od twojej żony",
+    "question" : "Wymień coś co masz w lodówce, za co powinieneś być wdzięczny Krowie",
     "answers" : [
         {
-            "answer" : "sex",
-            "points" : 47
+            "answer" : "Mleko",
+            "points" : 68
         },
         {
-            "answer" : "ubieranie sie",
-            "points" : 23
+            "answer" : "Ser",
+            "points" : 19
         },
         {
-            "answer" : "gotowanie",
-            "points" : 10
+            "answer" : "Mięso/Stek",
+            "points" : 8
         },
         {
-            "answer" : "sprzatanie",
+            "answer" : "Masło",
             "points" : 4
-        },
-        {
-            "answer" : "Maniery",
-            "points" : 2
-        },
-        {
-            "answer" : "Zarty",
-            "points" : 1
         }
     ]
 }

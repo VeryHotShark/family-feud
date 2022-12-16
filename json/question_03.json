@@ -1,29 +1,25 @@
 {
-    "question" : "Wymień coś, w czym twoja była dziewczyna była lepsza od twojej żony",
+    "question" : "Wymień coś z czego ludzie mogą wypaść/spaść",
     "answers" : [
         {
-            "answer" : "sex",
-            "points" : 47
+            "answer" : "z Drzewa",
+            "points" : 36
         },
         {
-            "answer" : "ubieranie sie",
-            "points" : 23
+            "answer" : "Z miłości/związku",
+            "points" : 25
         },
         {
-            "answer" : "gotowanie",
-            "points" : 10
+            "answer" : "Z łóżka",
+            "points" : 21
         },
         {
-            "answer" : "sprzatanie",
-            "points" : 4
+            "answer" : "Z krzeszła",
+            "points" : 12
         },
         {
-            "answer" : "Maniery",
-            "points" : 2
-        },
-        {
-            "answer" : "Zarty",
-            "points" : 1
+            "answer" : "Z samochodu",
+            "points" : 6
         }
     ]
 }

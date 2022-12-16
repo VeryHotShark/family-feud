@@ -31,11 +31,10 @@ function UpdateAnswers(question) {
 ipcRenderer.on("on-question-update", (e, args) => {
   UpdateAnswers(args);
 
-    // let icons = $('i');
-//   if(!icons.hasClass('hide'))
-    // icons.addClass('hide')
-    if($("i").hasClass('hide'))
-        $("i").addClass('hide');
+  // let icons = $('i');
+  //   if(!icons.hasClass('hide'))
+  // icons.addClass('hide')
+  if ($("i").hasClass("hide")) $("i").addClass("hide");
 });
 
 ipcRenderer.on("on-game-start", () => {
@@ -53,8 +52,47 @@ ipcRenderer.on("on-points-update", (e, args) => {
 });
 
 ipcRenderer.on("on-wrong-answer", (e, args) => {
-  let iconChildren = $(`div.${args} .icons`)
-    .children();
+  let iconChildren = $(`div.${args} .icons`).children();
 
-    iconChildren.filter('.hide').first().removeClass('hide');
+  iconChildren.filter(".hide").first().removeClass("hide");
+
+  $("#overlay").show();
+
+  setTimeout(() => {
+    $("#overlay").hide();
+  }, 1000);
+});
+
+ipcRenderer.on("on-wrong-general", () => {
+  $("#overlay").show();
+
+  setTimeout(() => {
+    $("#overlay").hide();
+  }, 1000);
+});
+
+ipcRenderer.on("on-questions-end", (e, args) => {
+  $("body").empty();
+
+  let centerDiv = $("<div></div>", {
+    class: "center"
+  })
+
+  let title = $("<h1></h1>", {
+    text: args.caption,
+  })
+
+  let points = $("<h1></h1>", {
+    text: args.points + " points!",
+  })
+
+  centerDiv.css("color", "#fff")
+  centerDiv.append(title, points);
+
+  $("body").append(centerDiv);
+
+  if(args.team == 0)
+    $("body").css("background-color", "#FF0000")
+  else
+    $("body").css("background-color", "#0000ff")
 });

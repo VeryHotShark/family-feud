@@ -1,29 +1,25 @@
 {
-    "question" : "Wymień coś, w czym twoja była dziewczyna była lepsza od twojej żony",
+    "question" : "Wymień miejsce wypełnione ludźmi, którzy nie chcą tam być",
     "answers" : [
         {
-            "answer" : "sex",
-            "points" : 47
+            "answer" : "Więzienie",
+            "points" : 36
         },
         {
-            "answer" : "ubieranie sie",
-            "points" : 23
-        },
-        {
-            "answer" : "gotowanie",
+            "answer" : "Piekło",
             "points" : 10
         },
         {
-            "answer" : "sprzatanie",
-            "points" : 4
+            "answer" : "Praca/Spotkania Biznesowe",
+            "points" : 10
         },
         {
-            "answer" : "Maniery",
-            "points" : 2
+            "answer" : "Cmentarz",
+            "points" : 8
         },
         {
-            "answer" : "Zarty",
-            "points" : 1
+            "answer" : "Kościół",
+            "points" : 8
         }
     ]
 }
